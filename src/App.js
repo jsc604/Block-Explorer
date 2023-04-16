@@ -1,22 +1,16 @@
 import { Alchemy, Network } from 'alchemy-sdk';
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './App.css';
+import LatestBlocks from './components/LatesBlocks';
+import NavBar from './components/NavBar';
 
-// Refer to the README doc for more information about using API
-// keys in client-side code. You should never do this in production
-// level code.
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
   network: Network.ETH_MAINNET,
 };
 
-
-// In this week's lessons we used ethers.js. Here we are using the
-// Alchemy SDK is an umbrella library with several different packages.
-//
-// You can read more about the packages here:
-//   https://docs.alchemy.com/reference/alchemy-sdk-api-surface-overview#api-surface
 const alchemy = new Alchemy(settings);
 
 function App() {
@@ -30,7 +24,25 @@ function App() {
     getBlockNumber();
   });
 
-  return <div className="App">Block Number: {blockNumber}</div>;
+  return (
+    <Router>
+      <div>
+        <NavBar />
+        <div className='w-4/5 mx-auto'>
+          <Switch>
+            <Route path="/" exact>
+              <div className=''>
+                <LatestBlocks blockNumber={blockNumber} />
+              </div>
+            </Route>
+            <Route path='/address'>
+              <LatestBlocks blockNumber={blockNumber} />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
