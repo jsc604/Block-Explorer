@@ -17,6 +17,7 @@ const LatestBlocks = ({ blockNumber }) => {
     }
 
     getBlockWithTransactions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("blocks- ", block);

@@ -8,10 +8,17 @@ const NavBar = () => {
     `mx-auto border border-black px-3.5 py-2.5 rounded-md ml-4 
     ${isSelected ? "bg-black text-white" : "hover:bg-black hover:text-white"}
     `;
-
+  
+  const homeButtonClass = (isSelected) => 
+    `text-3xl font-bold ${isSelected && 'underline'}`
+  ;
   return (
     <div className="shadow-md p-8 mb-10 flex justify-between items-center">
-      <Link to="/" className="text-3xl font-bold">
+      <Link
+        className={homeButtonClass(selected === "home")}
+        onClick={() => setSelected("home")}
+        to="/"
+      >
         <h1>Block Explorer</h1>
       </Link>
       <nav className="">
