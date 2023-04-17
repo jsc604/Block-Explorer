@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import SearchPage from './components/SearchPage';
 import AddressBalance from './components/AddressBalance';
 import AddressTx from './components/AddressTx';
+import Transaction from './components/Transaction';
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
@@ -36,7 +37,7 @@ function App() {
           <Switch>
             <Route path="/" exact>
               <div className=''>
-                <LatestBlocks blockNumber={blockNumber} />
+                <LatestBlocks blockNumber={blockNumber} home={true}/>
               </div>
             </Route>
             <Route path='/address-balance'>
@@ -54,7 +55,13 @@ function App() {
             <Route path='/transaction'>
               <Switch>
                 <Route exact path='/transaction' component={() => <SearchPage type='transaction' />} />
-                <Route path='/transaction/:transactionId' component={AddressTx} />
+                <Route path='/transaction/:transactionId' component={Transaction} />
+              </Switch>
+            </Route>
+            <Route path='/block'>
+              <Switch>
+                <Route exact path='/block' component={() => <SearchPage type='block' />} />
+                <Route path='/block/:blockId' component={LatestBlocks} />
               </Switch>
             </Route>
           </Switch>

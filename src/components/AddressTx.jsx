@@ -34,20 +34,19 @@ const AddressTx = ({ addressTx }) => {
         category: ["external", "internal", "erc20"],
         order: "desc",
       };
-    
+
       if (isContract) {
         transferParams.toAddress = searchTerm;
       } else {
         transferParams.fromAddress = searchTerm;
       }
-    
+
       let transferData = await alchemy.core.getAssetTransfers(transferParams);
-      console.log(transferData);
       setData(transferData);
-    };    
+    };
 
     getAddressTxData();
-  }, [isContract])
+  }, [isContract]);
 
   if (!data || loading) {
     return <p className="text-center py-30">Querying Data...</p>;
@@ -69,7 +68,14 @@ const AddressTx = ({ addressTx }) => {
           {data.transfers.map((tx, i) => {
             return (
               <tr key={i}>
-                <td>{tx.hash.slice(0, 20)}...{tx.hash.slice(-6)}</td>
+                <td>
+                  <Link
+                    to={`/transaction/${tx.hash}`}
+                    className="text-blue-800 hover:underline"
+                  >
+                    {tx.hash.slice(0, 20)}...{tx.hash.slice(-6)}
+                  </Link>
+                </td>
 
                 <td>
                   <Link
@@ -80,7 +86,9 @@ const AddressTx = ({ addressTx }) => {
                   </Link>
                 </td>
 
-                <td>{tx.value} {tx.asset}</td>
+                <td>
+                  {tx.value} {tx.asset}
+                </td>
 
                 <td>
                   <Link
