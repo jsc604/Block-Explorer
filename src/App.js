@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import LatestBlocks from './components/LatesBlocks';
 import NavBar from './components/NavBar';
+import SearchPage from './components/SearchPage';
+import AddressInfo from './components/AddressInfo';
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
@@ -26,7 +28,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className='text-gray-900'>
         <NavBar />
         <div className='w-4/5 mx-auto'>
           <Switch>
@@ -36,7 +38,10 @@ function App() {
               </div>
             </Route>
             <Route path='/address'>
-              <LatestBlocks blockNumber={blockNumber} />
+              <Switch>
+                <Route exact path='/address' component={() => <SearchPage type='address' />} />
+                <Route path='/address/:addressId' component={AddressInfo} />
+              </Switch>
             </Route>
           </Switch>
         </div>

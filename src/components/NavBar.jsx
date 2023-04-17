@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [selected, setSelected] = useState();
 
   const buttonClass = (isSelected) =>
-    `mx-auto border border-black px-3.5 py-2.5 rounded-md ml-4 
-    ${isSelected ? "bg-black text-white" : "hover:bg-black hover:text-white"}
+    `mx-auto border border-gray-900 px-3.5 py-2.5 rounded-md ml-4 
+    ${
+      isSelected
+        ? "bg-gray-900 text-white"
+        : "hover:bg-gray-900 hover:text-white"
+    }
     `;
-  
-  const homeButtonClass = (isSelected) => 
-    `text-3xl font-bold ${isSelected && 'underline'}`
-  ;
+
   return (
     <div className="shadow-md p-8 mb-10 flex justify-between items-center">
       <Link
-        className={homeButtonClass(selected === "home")}
+        className="text-3xl font-bold"
         onClick={() => setSelected("home")}
         to="/"
       >
@@ -30,11 +31,11 @@ const NavBar = () => {
           <button>Search by Address</button>
         </Link>
         <Link
-          className={buttonClass(selected === "token")}
-          onClick={() => setSelected("token")}
-          to="/token"
+          className={buttonClass(selected === "contract")}
+          onClick={() => setSelected("contract")}
+          to="/contract"
         >
-          <button>Search by Token</button>
+          <button>Search by Contract</button>
         </Link>
         <Link
           className={buttonClass(selected === "transaction")}
