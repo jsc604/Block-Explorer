@@ -1,6 +1,6 @@
 import { Alchemy, Network } from "alchemy-sdk";
 import { useEffect, useState } from "react";
-import AddressLink from "./AddressLink";
+import { Link } from "react-router-dom";
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
@@ -30,12 +30,22 @@ const LatestBlocks = ({ blockNumber }) => {
 
           <p className="break-words">
             From:{" "}
-            <AddressLink alchemy={alchemy} address={transaction.from} />
+            <Link
+              to={`/address-balance/${transaction.from}`}
+              className="text-blue-800 hover:underline"
+            >
+              {transaction.from}
+            </Link>
           </p>
 
           <p className="break-words">
             To:{" "}
-            <AddressLink alchemy={alchemy} address={transaction.to} />
+            <Link
+              to={`/address-balance/${transaction.to}`}
+              className="text-blue-800 hover:underline"
+            >
+              {transaction.to}
+            </Link>
           </p>
         </div>
       );

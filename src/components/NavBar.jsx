@@ -24,32 +24,32 @@ const NavBar = () => {
       </Link>
       <nav className="">
         <Link
-          className={buttonClass(selected === "address")}
-          onClick={() => setSelected("address")}
-          to="/address"
+          className={buttonClass(selected === "address-balance")}
+          onClick={() => setSelected("address-balance")}
+          to="/address-balance"
         >
-          <button>Search by Address</button>
+          <button>Get Address Balance</button>
         </Link>
         <Link
-          className={buttonClass(selected === "contract")}
-          onClick={() => setSelected("contract")}
-          to="/contract"
+          className={buttonClass(selected === "address-tx")}
+          onClick={() => setSelected("address-tx")}
+          to="/address-tx"
         >
-          <button>Search by Contract</button>
+          <button>Get Address Transactions</button>
         </Link>
         <Link
           className={buttonClass(selected === "transaction")}
           onClick={() => setSelected("transaction")}
           to="/transaction"
         >
-          <button>Search by Transaction</button>
+          <button>Get Transaction Data</button>
         </Link>
         <Link
           className={buttonClass(selected === "block")}
           onClick={() => setSelected("block")}
           to="/block"
         >
-          <button>Search by Block</button>
+          <button>Get Block Data</button>
         </Link>
       </nav>
     </div>

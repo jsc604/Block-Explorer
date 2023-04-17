@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './App.css';
+
 import LatestBlocks from './components/LatesBlocks';
 import NavBar from './components/NavBar';
 import SearchPage from './components/SearchPage';
-import AddressInfo from './components/AddressInfo';
+import AddressBalance from './components/AddressBalance';
+import AddressTx from './components/AddressTx';
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
@@ -37,10 +39,22 @@ function App() {
                 <LatestBlocks blockNumber={blockNumber} />
               </div>
             </Route>
-            <Route path='/address'>
+            <Route path='/address-balance'>
               <Switch>
-                <Route exact path='/address' component={() => <SearchPage type='address' />} />
-                <Route path='/address/:addressId' component={AddressInfo} />
+                <Route exact path='/address-balance' component={() => <SearchPage type='address-balance' />} />
+                <Route path='/address-balance/:addressId' component={AddressBalance} />
+              </Switch>
+            </Route>
+            <Route path='/address-tx'>
+              <Switch>
+                <Route exact path='/address-tx' component={() => <SearchPage type='address-tx' />} />
+                <Route path='/address-tx/:txId' component={AddressTx} />
+              </Switch>
+            </Route>
+            <Route path='/transaction'>
+              <Switch>
+                <Route exact path='/transaction' component={() => <SearchPage type='transaction' />} />
+                <Route path='/transaction/:transactionId' component={AddressTx} />
               </Switch>
             </Route>
           </Switch>

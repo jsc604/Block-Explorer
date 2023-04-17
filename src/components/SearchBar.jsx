@@ -7,12 +7,18 @@ const SearchBar = ({ type, setSearchParam }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!searchTerm || searchTerm.trim().length < 1) {
+      alert("Enter a valid search term");
+      return;
+    }  
+
     setSearchParam(searchTerm);
-    
-    if (type === "address") {
-      history.push(`/address/${searchTerm}`);
-    }
-    // Add more conditions for other search types if needed
+
+    type === "address-balance" && history.push(`/address-balance/${searchTerm}`);
+    type === "address-tx" && history.push(`/address-tx/${searchTerm}`);
+    type === "transaction" && history.push(`/transaction/${searchTerm}`);
+    type === "block" && history.push(`/block/${searchTerm}`);
   };
 
   return (

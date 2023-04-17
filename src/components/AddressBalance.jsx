@@ -1,6 +1,7 @@
 import { Alchemy, Network } from "alchemy-sdk";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
@@ -9,7 +10,7 @@ const settings = {
 
 const alchemy = new Alchemy(settings);
 
-const AddressInfo = ({ address }) => {
+const AddressBalance = ({ address }) => {
   const [data, setData] = useState();
   const { addressId } = useParams();
   const searchTerm = address || addressId;
@@ -57,8 +58,7 @@ const AddressInfo = ({ address }) => {
   return (
     <div>
       <h3 className="text-center text-xl py-8 font-semibold">
-        ETH Balance for address {searchTerm.slice(0, 5)}...
-        {searchTerm.slice(-5)}: {data[0]}
+        ETH Balance for address {searchTerm}: <span className='underline'>{data[0]}</span>
       </h3>
       <table className="w-full">
         <tr className="border-b-2 font-semibold text-lg">
@@ -67,21 +67,25 @@ const AddressInfo = ({ address }) => {
           <td>Balance</td>
           <td>Contract Address</td>
         </tr>
-        
-        {data[1].map((token) => {
+
+        {data[1].map((token, i) => {
           return (
-            <tr className="border-b text-start">
+            <tr className="border-b text-start" key={i}>
               <td>{token.symbol}</td>
               <td>{token.name}</td>
               <td>{token.balance}</td>
-              <td>{token.contractAddress}</td>
+              <Link
+                to={`/address-tx/${token.contractAddress}`}
+                className="text-blue-800 hover:underline"
+              >
+                <td>{token.contractAddress}</td>
+              </Link>
             </tr>
-          )
+          );
         })}
-
       </table>
     </div>
   );
 };
 
-export default AddressInfo;
+export default AddressBalance;

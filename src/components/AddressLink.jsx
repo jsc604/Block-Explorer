@@ -21,8 +21,8 @@ const AddressLink = ({ alchemy, address }) => {
 
   return (
     <Link
-      to={isContract ? `/contract/${address}` : `/address/${address}`}
-      className="text-blue-600 hover:underline"
+      to={isContract ? `/address-tx/${address}` : `/address-balance/${address}`}
+      className="text-blue-800 hover:underline"
     >
       {address}
     </Link>
